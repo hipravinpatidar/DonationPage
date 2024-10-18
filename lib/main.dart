@@ -1,8 +1,20 @@
-import 'package:donation/view/frontpage.dart';
+import 'package:donation/view/home_page/front_home_page/frontpage.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'controller/lanaguage_provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => LanguageProvider()),
+      ],
+      child: MyApp(),
+    ),
+
+  );
 }
 
 class MyApp extends StatelessWidget {

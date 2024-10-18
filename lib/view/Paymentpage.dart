@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 class Paymentpage extends StatefulWidget {
 
   final int totalAmount;
-
   final otherAmount;
 
 

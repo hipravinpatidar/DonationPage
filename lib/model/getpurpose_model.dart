@@ -1,31 +1,31 @@
 // To parse this JSON data, do
 //
-//     final donationCategoryModel = donationCategoryModelFromJson(jsonString);
+//     final getPurposeModel = getPurposeModelFromJson(jsonString);
 
 import 'dart:convert';
 
-DonationCategoryModel donationCategoryModelFromJson(String str) => DonationCategoryModel.fromJson(json.decode(str));
+GetPurposeModel getPurposeModelFromJson(String str) => GetPurposeModel.fromJson(json.decode(str));
 
-String donationCategoryModelToJson(DonationCategoryModel data) => json.encode(data.toJson());
+String getPurposeModelToJson(GetPurposeModel data) => json.encode(data.toJson());
 
-class DonationCategoryModel {
+class GetPurposeModel {
   int status;
   String message;
   int recode;
-  List<DonationTabs> data;
+  List<GetPurpose> data;
 
-  DonationCategoryModel({
+  GetPurposeModel({
     required this.status,
     required this.message,
     required this.recode,
     required this.data,
   });
 
-  factory DonationCategoryModel.fromJson(Map<String, dynamic> json) => DonationCategoryModel(
+  factory GetPurposeModel.fromJson(Map<String, dynamic> json) => GetPurposeModel(
     status: json["status"],
     message: json["message"],
     recode: json["recode"],
-    data: List<DonationTabs>.from(json["data"].map((x) => DonationTabs.fromJson(x))),
+    data: List<GetPurpose>.from(json["data"].map((x) => GetPurpose.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
@@ -36,14 +36,14 @@ class DonationCategoryModel {
   };
 }
 
-class DonationTabs {
+class GetPurpose {
   String? enName;
   String? hiName;
-  int? id;
+  int id;
   String? slug;
   String? image;
 
-  DonationTabs({
+  GetPurpose({
     required this.enName,
     required this.hiName,
     required this.id,
@@ -51,7 +51,7 @@ class DonationTabs {
     required this.image,
   });
 
-  factory DonationTabs.fromJson(Map<String, dynamic> json) => DonationTabs(
+  factory GetPurpose.fromJson(Map<String, dynamic> json) => GetPurpose(
     enName: json["en_name"],
     hiName: json["hi_name"],
     id: json["id"],
@@ -62,7 +62,7 @@ class DonationTabs {
   Map<String, dynamic> toJson() => {
     "en_name": enName ?? '',
     "hi_name": hiName ?? '',
-    "id": id ?? '',
+    "id": id,
     "slug": slug ?? '',
     "image": image ?? '',
   };
