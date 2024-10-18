@@ -349,7 +349,7 @@ class _DonationpageState extends State<Donationpage> {
                             height: screenHeight * 0.02,
                           ),
 
-                          Text(languageProvider.language == "english" ?  donationDetails!.enName: donationDetails!.enName,
+                          Text(languageProvider.language == "english" ?  donationDetails!.enName: donationDetails!.hiName,
                             style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
@@ -406,54 +406,60 @@ class _DonationpageState extends State<Donationpage> {
                                 horizontal: screenWidth * 0.02,
                                 vertical: screenHeight * 0.01,
                               ),
-                              child: Column(
-                                children: [
-                                  // Note 1
-                                  Text.rich(
-                                    TextSpan(
-                                      children: [
+                              child: Consumer<LanguageProvider>(
+                                builder: (BuildContext context, languageProvider, Widget? child) {
+                                  return Column(
+                                    children: [
+                                      // Note 1
+                                      Text.rich(
                                         TextSpan(
-                                          text: '* Note 1 :-',
+                                          children: [
+                                            TextSpan(
+                                              text: languageProvider.language == "english" ? '* Note:-'  : "टिप्पणी:",
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: screenWidth * 0.04,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                            TextSpan(
+                                              text:
+                                                  languageProvider.language == "english" ?
+                                    "1. Avail tz exemption on 50% of the amount you donate under section 80G of the Income Tax Act. Our NGO partners may retain a portion of the donated amount to cover their costs. However, you will receive the 80G certificate for the total amount donated.\n2. Donations once processed cannot be canceled or refunded."
+                                  : "1. आयकर अधिनियम की धारा 80जी के तहत आपके द्वारा दान की गई राशि के 50% पर छूट का लाभ उठाएं। हमारे एनजीओ भागीदार अपनी लागत को कवर करने के लिए दान की गई राशि का एक हिस्सा अपने पास रख सकते हैं। हालाँकि, आपको दान की गई कुल राशि के लिए 80G प्रमाणपत्र प्राप्त होगा।\n2. एक बार  दान होने के बाद इसे रद्द या वापस नहीं किया जा सकता है।",
+                                              style: TextStyle(
+                                                color: Color.fromRGBO(79, 79, 79, 1),
+                                                fontSize: screenWidth * 0.04,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        maxLines: _isExpanded ? null : 4,
+                                        overflow: _isExpanded
+                                            ? TextOverflow.visible
+                                            : TextOverflow.ellipsis,
+                                      ),
+                                      SizedBox(height: screenHeight * 0.01),
+
+                                      // Show more / Show less button
+                                      GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            _isExpanded = !_isExpanded;
+                                          });
+                                        },
+                                        child: Text(
+                                          _isExpanded ? "Show less" : "Show more",
                                           style: TextStyle(
-                                            color: Colors.black,
+                                            color: Colors.blue,
                                             fontSize: screenWidth * 0.04,
                                             fontWeight: FontWeight.w600,
                                           ),
                                         ),
-                                        TextSpan(
-                                          text:
-                                          ' Avail tax exemption on 50% of the amount you donate under Section 80G of the Income Tax Act. Our NGO partners may retain a portion of the donated amount to cover their costs. However, you will receive the 80G certificate for the total amount donated.',
-                                          style: TextStyle(
-                                            color: Color.fromRGBO(79, 79, 79, 1),
-                                            fontSize: screenWidth * 0.04,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    maxLines: _isExpanded ? null : 4,
-                                    overflow: _isExpanded
-                                        ? TextOverflow.visible
-                                        : TextOverflow.ellipsis,
-                                  ),
-                                  SizedBox(height: screenHeight * 0.01),
-
-                                  // Show more / Show less button
-                                  GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        _isExpanded = !_isExpanded;
-                                      });
-                                    },
-                                    child: Text(
-                                      _isExpanded ? "Show less" : "Show more",
-                                      style: TextStyle(
-                                        color: Colors.blue,
-                                        fontSize: screenWidth * 0.04,
-                                        fontWeight: FontWeight.w600,
                                       ),
-                                    ),
-                                  ),
-                                ],
+                                    ],
+                                  );
+                                },
                               ),
                             ),
                           ),
@@ -1123,7 +1129,7 @@ class _DonationpageState extends State<Donationpage> {
                           height: screenWidth * 0.14,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.orange,
+                              backgroundColor: CustomColors.clrorange,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),
@@ -1154,7 +1160,7 @@ class _DonationpageState extends State<Donationpage> {
                                     Text(
                                       languageProvider.language == "english"
                                           ? "Proceed to Pay"
-                                          : "चुकाने के लिए कार्रवाई शुरू करो",
+                                          : "भुगतान करें",
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: screenWidth * 0.05,
